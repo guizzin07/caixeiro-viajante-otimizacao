@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 # ==========================================
 
 # Coordenadas das cidades
+# o código define 10 cidades por coordenadas (x, y)
 cidades = [
     (10, 20),
     (20, 40),
@@ -21,7 +22,7 @@ cidades = [
     (100, 50)
 ]
 
-
+# distância euclidiana para descobrir a distância entre duas cidades
 # Calcula a distância entre duas cidades
 def calcular_distancia(cidade1, cidade2):
     x1, y1 = cidade1
@@ -32,7 +33,7 @@ def calcular_distancia(cidade1, cidade2):
         (y2 - y1) ** 2
     )
 
-
+# soma todas as distâncias de uma rota e, no final, calcula o caminho da última cidade de volta para a primeira
 # Calcula a distância total de uma rota
 def calcular_distancia_rota(rota):
 
@@ -69,7 +70,8 @@ def random_search(numero_iteracoes=100):
     historico = []
 
     for iteracao in range(numero_iteracoes):
-
+# Calcula a distância e compara com a melhor encontrada até aquele momento. Se for menor, substitui a melhor rota.
+        
         rota = list(range(len(cidades)))
         random.shuffle(rota)
 
@@ -132,6 +134,11 @@ print(f"Melhor rota: {melhor_rota_geral}")
 # ==========================================
 # ALGORITMO GENÉTICO
 # ==========================================
+# Ou seja:
+# População = 50: existem 50 soluções candidatas.
+# Crossover = 90%: grande chance de combinar duas rotas.
+# Mutação = 20%: chance de alterar uma rota.
+# Elitismo = 2: as duas melhores soluções são preservadas.
 
 TAMANHO_POPULACAO = 50
 TAXA_CROSSOVER = 0.9
@@ -158,7 +165,7 @@ def selecao_torneio(populacao, tamanho_torneio=3):
         populacao,
         tamanho_torneio
     )
-
+# O código escolhe 3 indivíduos aleatoriamente e pega o melhor deles:
     melhor = min(
         participantes,
         key=calcular_distancia_rota
